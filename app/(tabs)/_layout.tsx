@@ -33,7 +33,7 @@ const TabsLayout = () => {
         tabBarStyle: {
           backgroundColor: "#161622",
           borderTopColor: "#232533",
-          height: 84,
+          height: 80,
           borderRadius: 20,
           marginHorizontal: 10,
           marginBottom: 10,
@@ -83,7 +83,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
-              icon={icons.home}
+              icon={icons.heart}
               color={color}
               focused={focused}
               name="Summary"

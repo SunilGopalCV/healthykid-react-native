@@ -12,6 +12,7 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts",
-    "assets/icons.js"
+    "assets/icons.js",
+    "components/CustomButton.tsx"
   ]
 }
