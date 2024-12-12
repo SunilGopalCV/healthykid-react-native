@@ -6,6 +6,7 @@ import { images } from "@/constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import { Link } from "expo-router";
+import { supabase } from "@/lib/supabase";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -16,8 +17,36 @@ const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = async () => {
+    setIsSubmitting(true);
+    try {
+      const { email, password } = form;
 
+      // Ensure all fields are filled
+      if (!email || !password) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      // Supabase Sign-Up
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { username: form.username } },
+      });
+
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Sign-up successful! Please check your email for confirmation.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <SafeAreaView edges={["left", "right"]} className="h-full bg-white mx-0">
       <ScrollView>

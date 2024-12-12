@@ -1,13 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import { View, Text, ScrollView, Image } from "react-native";
 import React from "react";
-import { Redirect, router } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../constants";
 import CustomButton from "@/components/CustomButton";
 
+import { useGlobalContext } from "@/context/GlobalProvider";
+
 const Welcome = () => {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+  const router = useRouter();
+
+  if (!isLoading && isLoggedIn) {
+    return <Redirect href="/profile" />;
+  }
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
